@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using React.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace React.Controllers
@@ -44,12 +45,26 @@ namespace React.Controllers
             var getLink = db.Links.Where(x => x.LongLink == link.LongLink).FirstOrDefault();
             if (getLink == null)
             {
-                int hashCodeLink = (link.LongLink + "salt").GetHashCode();
-                if (hashCodeLink <= 0)
+                //простейший прототип построения осмысленной короткой ссылки
+                if (link.LongLink[0] == 'h')
                 {
-                    hashCodeLink = -hashCodeLink;
+                    int firstChar = link.LongLink.IndexOf('/') + 1;
+                    link.ShortLink = link.LongLink.Substring(firstChar + 1);
+                    if (link.ShortLink.IndexOf('/') != -1)
+                    {
+                        link.ShortLink = link.ShortLink.Substring(0, link.ShortLink.IndexOf('/'));
+                    }
                 }
-                var newLink = new Link(link.LongLink, hashCodeLink.ToString());
+                if (link.ShortLink.IndexOf("www.") != -1)
+                {
+                    link.ShortLink = link.ShortLink.Substring(4);
+                }
+                link.ShortLink = link.ShortLink.Substring(0, link.ShortLink.LastIndexOf('.'));
+                char newChar = link.ShortLink[0].ToString().ToUpper()[0];
+                link.ShortLink = newChar + link.ShortLink.Substring(1);
+
+
+                var newLink = new Link(link.LongLink, link.ShortLink);
                 db.Add(newLink);
                 db.SaveChanges();
                 return Ok(newLink);
