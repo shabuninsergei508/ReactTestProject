@@ -20,18 +20,28 @@ export class NavMenu extends Component {
           <Nav>
             <LinkContainer to={'/'} exact>
               <NavItem>
-                <Glyphicon glyph='home' /> Home
+                <Glyphicon glyph='home' /> Главная
               </NavItem>
             </LinkContainer>
-                    <LinkContainer to={'/linkslist'}>
+            <LinkContainer to={'/linkslist'}>
               <NavItem>
-                <Glyphicon glyph='education' /> List links
+                <Glyphicon glyph='education' /> Список ссылок
               </NavItem>
+            </LinkContainer>
+            <LinkContainer to={'/tags'}>
+                <NavItem>
+                    <Glyphicon glyph='th-list' /> Список тегов
+                </NavItem>
             </LinkContainer>
             <LinkContainer to={'/generator'}>
               <NavItem>
-                            <Glyphicon glyph='th-list' /> ShortLinkGenerator
+                    <Glyphicon glyph='th-list' /> Генератор ссылок
               </NavItem>
+            </LinkContainer>
+            <LinkContainer to={'/search'}>
+                <NavItem>
+                    <Glyphicon glyph='th-list' /> Поиск по тегам
+                </NavItem>
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>

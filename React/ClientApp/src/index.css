@@ -7,3 +7,32 @@
 .formLink{
     margin-top:25px;
 }
+.formLink form input {
+    margin-bottom: 15px;
+    min-width: 300px;
+    padding: 3px 10px;
+    transition-duration: .25s;
+    border: 1px solid;
+}
+.formLink form:first-of-type {
+    margin-top: 10px;
+}
+.formLink form input:hover {
+    border: 2px solid #4189C7;
+}
+.formLink form button {
+    margin-bottom: 15px;
+    min-width: 300px;
+    padding: 3px 10px;
+    transition-duration: .25s;
+    border: 0px;
+    color: white;
+    background-color: #4189C7;
+    border-radius:5px;
+}
+.formLink form button:hover {
+    border: 2px solid #4189C7;
+}
+.list {
+    margin-top: 25px;
+}

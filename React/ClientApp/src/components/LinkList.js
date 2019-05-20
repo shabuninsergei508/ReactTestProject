@@ -17,10 +17,14 @@ export class LinkList extends Component {
         const { links, loading } = this.state;
         return (
             loading ? "loading..." : (
-                <div>
-                    <b>Список коротких ссылок</b>
+                <div className="list">
+                    <b>Список наших партнеров:</b>
                     <ul>
-                        { links.map(link=> <li key={link.id}><a href={link.longLink}>{link.shortLink}</a></li> )}
+                        {links.map(link =>
+                            <li key={link.id}>
+                                <a href={link.longLink + "?discount=" + link.discount + "%"}>{link.shortLink}</a> <br /> <b>Ключевые фразы: {link.tag}</b> <br /> <b>Скидка: {link.discount} %</b>
+                            </li>
+                        )}
                     </ul>
                 </div>
             )

@@ -11,16 +11,11 @@ namespace React.Models
         {
             if (!context.Links.Any())
             {
+
                 string longLink = "https://www.google.ru/";
-                int hashCodeLink = (longLink + "solt").GetHashCode();
-                if (hashCodeLink <= 0)
-                {
-                    hashCodeLink = -hashCodeLink;
-                }
-                string shortLink = hashCodeLink.ToString();
 
                 context.Links.AddRange(
-                    new Link(longLink, shortLink)
+                    new Link(longLink, "testGoogle", "поиск, интернет-магазин", 15)
                 );
                 context.SaveChanges();
             }

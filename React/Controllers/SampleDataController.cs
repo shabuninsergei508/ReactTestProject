@@ -22,13 +22,28 @@ namespace React.Controllers
             return Ok(links);
         }
 
-        [HttpGet("{SearchLink}")]
-        public IActionResult Get(string SearchLink)
+        [HttpPost("{SearchTag}")]
+        public IActionResult Post(string searchTag)
         {
-            var getLinks = db.Links;
-            if (getLinks != null)
+            //var links = db.Links;
+            var links = new List<Link>();
+            List<string> tags = new List<string>();
+            
+            foreach (Link link in links)
             {
-                return Ok(getLinks);
+                tags = link.Tag.Split(", ").ToList();
+                foreach (string tag in tags)
+                {
+                    if (tag == searchTag)
+                    {
+                        links.Add(link);
+                    }
+                        
+                }
+            }
+            if (links.Count() != 0)
+            {
+                return Ok(links);
             }
             else
             {
@@ -64,7 +79,7 @@ namespace React.Controllers
                 link.ShortLink = newChar + link.ShortLink.Substring(1);
 
 
-                var newLink = new Link(link.LongLink, link.ShortLink);
+                var newLink = new Link(link.LongLink, link.ShortLink, link.Tag, link.Discount);
                 db.Add(newLink);
                 db.SaveChanges();
                 return Ok(newLink);
